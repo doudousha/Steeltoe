@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SteeltoeExample001.Controllers
 {
+
     [Route("api/[controller]")]
-    [ApiController]
-    public class MyServiceController : ControllerBase
+    public class MyServiceController : Controller
     {
 
         [HttpGet]

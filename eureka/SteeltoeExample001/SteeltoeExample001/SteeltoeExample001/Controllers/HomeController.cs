@@ -15,15 +15,13 @@ namespace SteeltoeExample001.Controllers
     public class HomeController : Controller
     {
         private readonly IEurekaClientService _eurekaClientService;
-        private readonly IDiscoveryClient _client;
         private DiscoveryHttpClientHandler _handler;
 
 
         public HomeController(IEurekaClientService eurekaClientService , IDiscoveryClient client, ILoggerFactory logFactory = null)
         {
             _eurekaClientService = eurekaClientService;
-            _client = client;
-            _handler = new DiscoveryHttpClientHandler(client);
+            _handler = new DiscoveryHttpClientHandler(client, logFactory?.CreateLogger<DiscoveryHttpClientHandler>());
         }
 
      
@@ -70,7 +68,7 @@ namespace SteeltoeExample001.Controllers
         public async Task<string> MyService()
         {
             var client = new HttpClient(_handler, false);
-            var result = client.GetStringAsync("http://NETCORE-SERVICE/api/MyService/test").Result;
+            var result = client.GetStringAsync("http://NETCORESERVICE/api/MyService/test").Result;
             return result;
         }
     }

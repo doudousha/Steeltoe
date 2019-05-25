@@ -1,11 +1,13 @@
 spring:
   application:
-    name: eurekakClient01
+    name: eurekakConsumer02
 server:
-  port: 12001
+  port: 12002
 
 
 eureka:
+  instance:
+    preferIpAddress: true
   client:
     register-with-eureka: true
     fetch-registry: true

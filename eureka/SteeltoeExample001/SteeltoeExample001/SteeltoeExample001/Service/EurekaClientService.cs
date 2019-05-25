@@ -29,7 +29,7 @@ namespace SteeltoeExample001.Service
         public Task<string> GetServices()
         {
             var client = new HttpClient(_handler, false);
-            var result = client.GetStringAsync("http://EUREKAK-CLIENT01/getMember");
+            var result = client.GetStringAsync("http://EUREKAKCLIENT01/getMember");
 
             return result;
         }
