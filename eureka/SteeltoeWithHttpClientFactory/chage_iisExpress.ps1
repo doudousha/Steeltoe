@@ -4,12 +4,18 @@
 $ipAddress = Get-NetIPAddress -AddressFamily ipV4 | where {$_.AddressState -eq "Preferred" }
 $xmlFileName = (Get-Location).ToString() + "\.vs\config\applicationhost.config"
 $xmlConfig =[xml]( get-content -Path $xmlFileName)
-$site =$xmlConfig.configuration["system.applicationHost"]["sites"].site  | where {$_.name -eq "SteeltoeWithHttpClientFactory"}
-$attrSource = $site.bindings.binding[0].GetAttribute("bindingInformation")
+$projectName = ( Get-Item (Get-Location).ToString()).Name 
+
+$site =$xmlConfig.configuration["system.applicationHost"]["sites"].site  | where {$_.name -eq $projectName }
+
+$attrSource = $site.bindings.ChildNodes[0].GetAttribute("bindingInformation")
+$attrSource
+
 
 # Create new node:
 $bindingResults = @()
 foreach($item in  $ipAddress ){
+
     $binding = $xmlConfig.CreateElement("binding")
     $binding.SetAttribute("protocol","http")
     $binding.SetAttribute("bindingInformation",$attrSource.Replace("localhost",$item.IPAddress))
