@@ -1,0 +1,4 @@
+﻿
+
+
+Install-Package Pivotal.Discovery.ClientCore -Version 2.2.0
